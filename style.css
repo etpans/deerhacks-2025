@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Gentium+Plus:ital,wght@0,400;0,700;1,400;1,700&family=Sen:wght@400;700;800&display=swap');
+
+:root[data-theme="light"] {
+    --text: #040316;
+    --background: #f0f0f0;
+    --primary: #0600bd;
+    --secondary: #dddbff;
+    --accent: #443dff;
+}
+
+:root {
+    --text: #eae9fc;
+    --text-hover: #d1cfff;
+    --background: #0c1456;
+    --background-light: #f0f0f0;
+    --primary: #4942ff;
+    --secondary: #020024;
+    --accent: #0600c2;
+}
+
+/* GENERAL STYLES */
+.title {
+    font: 1.4rem 'Sen', sans-serif;
+    font-weight: 600;
+}
+
+/* NAVBAR */
+
+/* General navbar styles */
+.navbar-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--background);
+    padding: 0 20px;
+}
+
+.navbar {
+    border-bottom: 1px solid #ccc;
+    height: 70px
+}
+
+.navbar a {
+    text-decoration: none;
+    color: var(--text);
+    transition: color 0.3s ease;
+    font: 1.3rem 'Sen', sans-serif;
+    font-weight: 600;
+}
+
+.navbar a:hover {
+    color: var(--text-hover)
+}
+
+.logo-primary {
+    color: rgb(100, 141, 255)
+}
+
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-links {
+    list-style: none;
+    margin-left: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.navbar-links li {
+    display: inline;
+}
+
+.navbar-right {
+    display: flex;
+    gap: 15px;
+}
+
+/* LANDING PAGE MAIN CONTENT */
+
+.landing-container {
+    position: relative;
+    height: 90vh;
+    background-image: url('your-image-url.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.landing-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    filter: grayscale(50%); /* Apply slight grayscale to the background */
+}
+
+.landing-title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.cta-button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background-color: #ff6347; /* You can change the button color here */
+}
+
+/* EVENTS */
+.event-wrapper {
+    display: flex;
+    height: 100vh;
+    background-color: white;
+}
+
+.events-left {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    background-color: var(--background-light);
+    padding: 15px;
+    justify-content: flex-start;
+
+}
+
+.event-column-title {
+    width: 100%;
+    padding-bottom: 16px;
+    color: black
+}
+
+.events-right {
+    width: 70%;
+    background-color: var(--background-light);
+    border-left: 1px solid rgb(228, 228, 228);
+    padding: 15px;
+}
+
+.event-widget-wrapper {
+    width: 90%;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    border-radius: 12px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.event-widget-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.event-widget-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+}
+
+.event-widget-date {
+    font-size: 14px;
+    color: gray;
+}
+
+.event-widget-description {
+    font-size: 12px;
+    margin-top: 8px;
+    color: black;
+
+}
+
+.event-widget-location {
+    font-size: 12px;
+    font-style: italic;
+    margin-top: 4px;
+    color: black;
+
+}
+
+.event-widget-link {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #1976d2;
+    text-decoration: none;
+}
+/* MAP STYLES */
+
+.map-wrapper {
+    background: white;
+    width: 100%;
+    height: 82%
+}
+
+.map-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain
+}
+
+.area {
+    background-color: red;
+    outline-color: red;
+}
+
