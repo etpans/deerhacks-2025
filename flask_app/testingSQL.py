@@ -85,12 +85,13 @@ def get_filters(location: str, date: datetime.date, start_time: datetime.time, e
 def result_to_eventlist(result: list[tuple]):
     events = []
     for row in result:
-        events["name"] = row[0]
-        events["loc"] = row[1]
-        events["desc"] = row[2]
-        events["club"] = row[3]
-        events["start_time"] = row[4]
-        events["end_time"] = row[5]
+        events["id"] = row[0]
+        events["name"] = row[1]
+        events["loc"] = row[2]
+        events["desc"] = row[3]
+        events["club"] = row[4]
+        events["start_time"] = row[6]
+        events["end_time"] = row[7]
     return events
 
 def add_timetable():

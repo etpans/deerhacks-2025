@@ -1,8 +1,9 @@
 import { useState , useEffect } from 'react'
-import './App.css';
-import NavBar from './components/NavBar';
-import LandingContent from './components/Landing';
-import Events from './components/Events';
+import './App.css'
+import NavBar from './components/NavBar'
+import LandingContent from './components/Landing'
+import Events from './components/Events'
+import EventWidget from './components/EventWidget'
 import 'leaflet/dist/leaflet.css';
 import EventWidget from './components/EventWidget';
 
