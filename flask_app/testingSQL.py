@@ -18,7 +18,7 @@ def startup():
     mydb = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="1234",
+        password="BlueLemonadeCats87/",
         database="utm_website"
         )
     mycursor = mydb.cursor()
@@ -163,7 +163,6 @@ def get_user_events(user_id: int):
 def testing_stuff():
     v = "datetime.date(1,1,1)"
     print(v)
-    jsonify(v)
     # print(get_search_data("midterm"))
     # print(get_filters(None, "2025-02-14", None, None, ["midterm", "draw"]))
 
