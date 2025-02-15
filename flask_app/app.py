@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 import mysql.connector
 from testingSQL import startup, get_map
 
@@ -6,13 +6,14 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Hello World!"
+    print("Hello World!")
+    return jsonify("Hello World!")
 
 @app.route("/map")
 def map():
     startup()
     number = get_map()
-    return number
+    return jsonify(number)
 
 if __name__ == "__main__":
     app.run()

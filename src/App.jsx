@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 import './App.css'
 import NavBar from './components/NavBar'
 import LandingContent from './components/Landing'
@@ -8,10 +8,27 @@ import 'leaflet/dist/leaflet.css';
 import { Button } from '@mui/material'
 
 function App() {
+
   const [showEvents, setShowEvents] = useState(false)
+  const [count, setCount] = useState("");
+
+  const fetchMap = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/map');
+      const itemData = await response.json();
+      setCount(itemData);
+    }
+    catch(error){console.log(error)}
+  }
+
+  useEffect(() => {
+    fetchMap();
+  }, []);
 
   const handleClick = () => {
     alert("Button clicked!");
+    fetchMap();
+    console.log(count);
   };
 
   return (
@@ -26,6 +43,7 @@ function App() {
     </>
   )
 }
+
 
 // {showEvents ? (
 //   <Events>
