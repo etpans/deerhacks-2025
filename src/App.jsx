@@ -1,38 +1,30 @@
-import { useState } from 'react'
-import './App.css'
-import NavBar from './components/NavBar'
-import LandingContent from './components/Landing'
-import Events from './components/Events'
-import EventWidget from './components/EventWidget'
+import { useState } from 'react';
+import './App.css';
+import NavBar from './components/NavBar';
+import LandingContent from './components/Landing';
+import Events from './components/Events';
 import 'leaflet/dist/leaflet.css';
-import { Button } from '@mui/material'
+import EventWidget from './components/EventWidget';
 
 function App() {
-  const [showEvents, setShowEvents] = useState(false)
+    const [showEvents, setShowEvents] = useState(false);
 
-  const handleClick = () => {
-    alert("Button clicked!");
-  };
-
-  return (
-    <>
-      <NavBar />
-  
-      {/* temporary visual */}
-      <Events>
-        <EventWidget />
-      </Events>
-      <Button variant="contained" color="primary" onClick={handleClick}>this</Button>
-    </>
-  )
+    return (
+        <>
+            <NavBar 
+                showEvents={showEvents}  // Pass state to change navbar position
+                onShowEvents={() => setShowEvents(true)} 
+                onShowHome={() => setShowEvents(false)}
+            />
+            {showEvents ? (
+              <Events onBack={() => setShowEvents(false)} >
+                  <EventWidget/>
+                </Events>
+            ) : (
+                <LandingContent onShowEvents={() => setShowEvents(true)} />
+            )}
+        </>
+    );
 }
 
-// {showEvents ? (
-//   <Events>
-//     {/* <EventDetails /> Wrapped inside Events */}
-//   </Events>
-// ) : (
-//   <LandingContent onShowEvents={() => setShowEvents(true)} />
-// )}
-
-export default App
+export default App;

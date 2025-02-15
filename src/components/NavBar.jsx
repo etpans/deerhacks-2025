@@ -3,7 +3,7 @@ import { Button } from '@mui/material'; // Import Material UI Button
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
-function NavBar() {
+function NavBar({showEvents, onShowEvents, onShowHome}) {
     const [isDarkMode, setIsDarkMode] = useState(false);
 
     const toggleMode = () => {
@@ -11,17 +11,17 @@ function NavBar() {
     };
 
     return (
-        <nav className="navbar-wrapper">
+        <nav className={`navbar-wrapper ${showEvents ? 'navbar-normal' : 'navbar-absolute'}`}>
             <div className="navbar-left">
-                <a href="" className="logo">
+                <a href="#" className="logo" onClick={(e) => { e.preventDefault(); onShowHome(); }}>
                     <span className="logo-primary">U</span>nite<span className="logo-primary"><sup>TM</sup></span>
                 </a>
                 <ul className="navbar-links" style={{ listStyleType: 'none', padding: 0 }}>
                     <li>
-                        <a href="" className="navbar">Event</a>
+                        <a href="#" className="navbar" onClick={(e) => { e.preventDefault(); onShowEvents(); }}>Events</a>
                     </li>
                     <li>
-                        <a href="" className="navbar">About</a>
+                        <a href="https://github.com/etpans/deerhacks-2025" target='_blank' className="navbar">About</a>
                     </li>
                 </ul>
             </div>
