@@ -10,7 +10,7 @@
 
 :root {
     --text: #eae9fc;
-    --text-hover: #d1cfff;
+    --text-hover: #bdbbfc;
     --background: #0c1456;
     --background-light: #f0f0f0;
     --primary: #4942ff;
@@ -32,24 +32,51 @@
     justify-content: space-between;
     align-items: center;
     background-color: var(--background);
-    padding: 0 20px;
+    z-index: 2;
+    width: 100%
+}
+
+.navbar-normal {
+    position: static;
+}
+
+.navbar-absolute {
+    position: absolute;
 }
 
 .navbar {
-    border-bottom: 1px solid #ccc;
-    height: 70px
+    height: 70px;
 }
 
-.navbar a {
+
+
+.navbar-left {
+    margin-left: 35px
+}
+
+.navbar-left a {
     text-decoration: none;
     color: var(--text);
     transition: color 0.3s ease;
     font: 1.3rem 'Sen', sans-serif;
     font-weight: 600;
+    padding: 0 15px;
 }
 
-.navbar a:hover {
-    color: var(--text-hover)
+.logo {
+    font-size: 1.8rem !important
+}
+
+.navbar-left a:hover {
+    color: var(--text-hover);
+}
+
+.logo-primary {
+    transition: color 0.3s ease;
+}
+
+.navbar-left a:hover .logo-primary {
+    color: var(--text)
 }
 
 .logo-primary {
@@ -79,48 +106,51 @@
 }
 
 /* LANDING PAGE MAIN CONTENT */
-
-.landing-container {
-    position: relative;
-    height: 90vh;
-    background-image: url('your-image-url.jpg');
-    background-size: cover;
-    background-position: center;
+.landing-wrapper {
+    height: 100vh;
+    background-color: #f6f6f6;
+    background-image: url("/src/assets/utm-background.jpg");
+    background-size: cover; /* Makes the image cover the entire parent */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-position: center; /* Centers the image */
 }
 
-.landing-overlay {
+.landing-wrapper::before {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.4); /* Dark overlay */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
+    background: rgba(97, 97, 97, 0.753); /* Adjust opacity and color as needed */
+    z-index: 1; /* Places the overlay above the background */
+}
+
+.landing-box {
+    color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centers the box */
+    padding: 40px 60px;
+    background-color: rgba(221, 221, 221, 0.75); /* Background for the box with some opacity */
+    z-index: 2; /* Ensures the box appears above the overlay */
+    border-radius: 10px;
+    border: 1 solid grey;
+    width: 700px;
     text-align: center;
-    filter: grayscale(50%); /* Apply slight grayscale to the background */
 }
 
-.landing-title {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    font-weight: bold;
-    text-transform: uppercase;
+.main-title {
+
 }
 
-.cta-button {
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    background-color: #ff6347; /* You can change the button color here */
-}
+
 
 /* EVENTS */
 .event-wrapper {
     display: flex;
-    height: 100vh;
+    height: 100%;
     background-color: white;
 }
 
@@ -148,10 +178,9 @@
 }
 
 .event-widget-wrapper {
-    width: 90%;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 5px;
+    margin: 10px 0;
+    padding: 10px 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 12px; 
     display: flex;
     flex-direction: column;
@@ -159,6 +188,7 @@
 }
 
 .event-widget-content {
+    padding: 0 5px;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -197,6 +227,13 @@
     color: #1976d2;
     text-decoration: none;
 }
+
+.scrollable-container {
+    max-height: 400px; /* Set a fixed height for the scrolling container */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 10px; /* Optional: Add padding if needed */
+}
+
 /* MAP STYLES */
 
 .map-wrapper {
