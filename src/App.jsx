@@ -18,8 +18,8 @@ function App() {
             />
             {showEvents ? (
               <Events onBack={() => setShowEvents(false)} >
-                  <EventWidget/>
-                </Events>
+                <EventWidget/>
+              </Events>
             ) : (
                 <LandingContent onShowEvents={() => setShowEvents(true)} />
             )}

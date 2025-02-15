@@ -1,4 +1,6 @@
 import React from 'react';
+import Filters from './Filters';
+import Search from './Search'
 
 const events = [
     { 
@@ -29,19 +31,23 @@ const events = [
 
 function EventWidget() {
     return (
-        <div className="scrollable-container">
-            {events.map(event => (
-                <div key={event.id} className="event-widget-wrapper">
-                    <div className="event-widget-content">
-                        <div className="event-widget-title title">{event.title}</div>
-                        <div className="event-widget-date">{event.date}</div>
-                        <div className="event-widget-description">{event.description}</div>
-                        <div className="event-widget-location">{event.location}</div>
-                        <a href={event.hyperlink} target="_blank" rel="noopener noreferrer" className="event-widget-link">More Info</a>
+        <>
+            <Search/>
+            <Filters/>
+            <div className="scrollable-container">
+                {events.map(event => (
+                    <div key={event.id} className="event-widget-wrapper">
+                        <div className="event-widget-content">
+                            <div className="event-widget-title title">{event.title}</div>
+                            <div className="event-widget-date">{event.date}</div>
+                            <div className="event-widget-description">{event.description}</div>
+                            <div className="event-widget-location">{event.location}</div>
+                            <a href={event.hyperlink} target="_blank" rel="noopener noreferrer" className="event-widget-link">More Info</a>
+                        </div>
                     </div>
-                </div>
-            ))}
-        </div>
+                ))}
+            </div>
+        </>
     );
 }
 

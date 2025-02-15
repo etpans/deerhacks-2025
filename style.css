@@ -234,6 +234,10 @@
     padding: 10px; /* Optional: Add padding if needed */
 }
 
+.scrollable-container event-widget-wrapper:last-child {
+    margin-bottom: 100px;
+}
+
 /* MAP STYLES */
 
 .map-wrapper {
@@ -253,3 +257,84 @@
     outline-color: red;
 }
 
+/* FILTERS */
+
+.filter-wrapper {
+    margin: 10px 0;
+    padding: 10px 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px; 
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-title {
+    color: black;
+    pointer-events: fill;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+.filter-list {
+    color: black;
+    margin: 0
+}
+
+/* SEARCH STYLES */
+.search-container {
+    display: flex;
+    align-items: center;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    padding: 5px 10px;
+    background-color: #f7f7f7;
+    width: 350px; /* Set the width to a larger value */
+    margin: 0 auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search-input {
+    border: none;
+    outline: none;
+    padding: 8px;
+    font-size: 16px;
+    flex-grow: 1;
+    background-color: transparent;
+    color: #333;
+    transition: all 0.3s ease;
+  }
+  
+  .search-input::placeholder {
+    color: #aaa;
+  }
+  
+  .search-button {
+    background-color: #007bff;
+    border: none;
+    padding: 8px 15px;
+    margin-left: 5px;
+    border-radius: 25px;
+    cursor: pointer;
+    color: black;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  
+  .search-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .search-button:focus {
+    outline: none;
+  }
+  
+
+  
