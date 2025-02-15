@@ -25,9 +25,16 @@ def startup():
     for line in result:
         locations.append(line[0])
 
-def get_map(input_str: str):
-    global chosen_location
-    chosen_location = input_str
+def get_map():
+    #count number of events for each location_id
+    location_freq = []
+    for location in locations:
+        sql = ("SELECT COUNT(*) AS `Number of events` FROM events WHERE event_loc = %s")
+        val = [location]
+        mycursor.execute(sql, val)
+        result = mycursor.fetchall()
+        location_freq.append((f"{location} : {result[0][0]}"))
+    return location_freq
 
     return get_filters(input_str)
 
