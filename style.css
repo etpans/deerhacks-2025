@@ -1,0 +1,84 @@
+/* NAVBAR */
+/* General navbar styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color:rgb(8, 7, 56);
+    border-bottom: 1px solid #ccc;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-links {
+    list-style: none;
+    margin-left: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.navbar-links li {
+    display: inline;
+}
+
+.navbar-right {
+    display: flex;
+    gap: 15px;
+}
+
+.navbar-button {
+    padding: 8px 12px;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+}
+
+.navbar-button:hover {
+    background-color: #0056b3;
+}
+
+
+/* LANDING PAGE MAIN CONTENT */
+
+.landing-container {
+    position: relative;
+    height: 100vh;
+    background-image: url('your-image-url.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.landing-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    filter: grayscale(50%); /* Apply slight grayscale to the background */
+}
+
+.landing-title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.cta-button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background-color: #ff6347; /* You can change the button color here */
+}
