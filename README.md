@@ -10,11 +10,11 @@ Currently, two official plugins are available:
 ### Getting Started
 
 1. Clone the repository:
-   git clone <repo-url>
-   cd <project-name>
+   `git clone <repo-url>`
+   `cd <project-name>`
 
 2. Install dependencies:
-   npm install
+   `npm install`
 
 3. Start the development server:
-   npm run dev
+   `npm run dev`
