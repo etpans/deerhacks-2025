@@ -4,14 +4,6 @@ from testingSQL import startup, get_map, get_filtered_data, get_search_data
 import datetime
 
 app = Flask(__name__)
-# mydb = mysql.connector.connect(
-#     host="localhost",
-#     user="root",
-#     password="BlueLemonadeCats87/",
-#     database="utm_website"
-#     )
-# mycursor = mydb.cursor()
-# mycursor.execute("USE utm_website")
 
 @app.route("/")
 def home():
@@ -41,7 +33,4 @@ def search():
     # return jsonify(events)
 
 if __name__ == "__main__":
-    # load_locations()
-    # print(locations)
-
     app.run()
