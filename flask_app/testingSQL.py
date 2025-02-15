@@ -11,7 +11,7 @@ def startup():
     mydb = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="BlueLemonadeCats87/",
+        password="1234",
         database="utm_website"
         )
     mycursor = mydb.cursor()
@@ -31,29 +31,53 @@ def get_map(input_str: str):
 
     return filter_by_location(input_str)
 
-def get_filters(location: str, date: datetime.date, start_time: datetime.time, end_time: datetime.time, categories: list[str]):
+
+def get_filters(location: str, date: datetime.date, start_time: datetime.time, end_time: datetime.time, search: list[str]):
+    drop = ("DROP TABLE filtered_table")
+    mycursor.execute(drop)
+    create = ("CREATE TABLE filtered_table (\
+	event_id INT PRIMARY KEY,\
+	event_name VARCHAR(50),\
+    event_loc VARCHAR(4),\
+    event_desc VARCHAR(250),\
+    event_club VARCHAR(50),\
+    event_date DATE,\
+    event_start_time TIME,\
+    event_end_time TIME \
+    );")
+    mycursor.execute(create)
     if location:
-        sql = ("SELECT event_name,event_loc,event_desc,event_club,event_start_time,event_end_time FROM events WHERE event_loc = %s")
+        sql = ("INSERT INTO filtered_table SELECT * FROM events WHERE event_loc = %s")
         val = [location]
         mycursor.execute(sql, val)
     if date:
-        sql = ("SELECT event_name,event_loc,event_desc,event_club,event_start_time,event_end_time FROM events WHERE event_date = %s")
+        sql = ("DELETE FROM filtered_table WHERE date = %s")
         val = [date]
-        mycursor.execute(sql, val)
+        mycursor.commit(sql, val)
     if start_time:
-        sql = ("SELECT event_name,event_loc,event_desc,event_club,event_start_time,event_end_time FROM events WHERE event_start_time >= %s")
+        sql = ("DELETE FROM filtered_table WHERE start_time < %s")
         val = [start_time]
-        mycursor.execute(sql, val)
+        mycursor.commit(sql, val)
     if end_time:
-        sql = ("SELECT event_name,event_loc,event_desc,event_club,event_start_time,event_end_time FROM events WHERE event_end_time <= %s")
-        val = [start_time]
-        mycursor.execute(sql, val)
+        sql = ("DELETE FROM filtered_table WHERE end_time > %s")
+        val = [end_time]
+        mycursor.commit(sql, val)
 
-    if categories:
-        for category in categories:
-            sql = ("SELECT event_id FROM categories WHERE category = %s")
-            val = [category]
-            mycursor.execute(sql, val)
+    if search:
+        # Build the WHERE clause dynamically for multiple words
+        conditions = ' OR '.join([f"club_desc LIKE %s" for _ in search])
+        
+        sql = f"""
+            DELETE FROM filtered_table
+            WHERE NOT ({conditions});
+        """
+        
+        # Add wildcards (%) to search for words inside `club_desc`
+        val = [f"%{category}%" for category in search]
+    
+    mycursor.commit(sql, val)
+    select_sql = "SELECT * FROM filtered_table"
+    mycursor.execute(select_sql)
     
     result = mycursor.fetchall()
 
@@ -62,13 +86,12 @@ def get_filters(location: str, date: datetime.date, start_time: datetime.time, e
 def result_to_eventlist(result: list[tuple]):
     events = []
     for row in result:
-        events["id"] = row[0]
-        events["name"] = row[1]
-        events["loc"] = row[2]
-        events["desc"] = row[3]
-        events["club"] = row[4]
-        events["start_time"] = row[6]
-        events["end_time"] = row[7]
+        events["name"] = row[0]
+        events["loc"] = row[1]
+        events["desc"] = row[2]
+        events["club"] = row[3]
+        events["start_time"] = row[4]
+        events["end_time"] = row[5]
     return events
 
 def add_timetable():
