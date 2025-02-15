@@ -7,11 +7,11 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-### Getting Started
+### Installation
 
 1. Clone the repository:
-   `git clone <repo-url>`
-   `cd <project-name>`
+   `git clone https://github.com/etpans/deerhacks-2025.git`
+   `cd deerhacks-2025`
 
 2. Install dependencies:
    `npm install`
