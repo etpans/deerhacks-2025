@@ -29,8 +29,7 @@ def get_map(input_str: str):
     global chosen_location
     chosen_location = input_str
 
-    return filter_by_location(input_str)
-
+    return get_filters(input_str)
 
 def get_filters(location: str, date: datetime.date, start_time: datetime.time, end_time: datetime.time, search: list[str]):
     drop = ("DROP TABLE filtered_table")
