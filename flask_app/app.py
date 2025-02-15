@@ -25,7 +25,4 @@ def map():
     return jsonify(number)
 
 if __name__ == "__main__":
-    # load_locations()
-    # print(locations)
-
     app.run()
