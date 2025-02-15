@@ -33,4 +33,7 @@ def search():
     # return jsonify(events)
 
 if __name__ == "__main__":
+    # load_locations()
+    # print(locations)
+
     app.run()
