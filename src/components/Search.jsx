@@ -59,7 +59,7 @@ function Search({ onSearch }) {
         className="search-button"
         variant="contained" // Material-UI style
         sx={{
-          backgroundColor: '#06169c', // Background color
+          backgroundColor: '#0c1456', // Background color
           color: 'white', // Text color
           '&:hover': { backgroundColor: '#020733' }, // Hover effect
           borderRadius: '50%', // Make the button round

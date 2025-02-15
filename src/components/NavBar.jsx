@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Button } from '@mui/material'; // Import Material UI Button
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
@@ -21,7 +20,7 @@ function NavBar({showEvents, onShowEvents, onShowHome}) {
                         <a href="#" className="navbar" onClick={(e) => { e.preventDefault(); onShowEvents(); }}>Events</a>
                     </li>
                     <li>
-                        <a href="https://github.com/etpans/deerhacks-2025" target='_blank' className="navbar">About</a>
+                        <a href="https://github.com/etpans/deerhacks-2025" target='_blank' className="navbar">GitHub</a>
                     </li>
                 </ul>
             </div>

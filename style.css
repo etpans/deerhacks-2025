@@ -293,8 +293,8 @@
     border-radius: 25px;
     padding: 5px 10px;
     background-color: #f7f7f7;
-    width: 350px; /* Set the width to a larger value */
     margin: 0 auto;
+    width: 95%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
   
@@ -334,6 +334,14 @@
   
   .search-button:focus {
     outline: none;
+  }
+  
+  .input-field {
+    background-color: #f7f7f7;
+    color: black;
+    border: 0;
+    padding: 0 5px;
+    float: right;
   }
   
 

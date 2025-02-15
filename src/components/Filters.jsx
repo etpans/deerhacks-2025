@@ -5,19 +5,28 @@ import { Button } from '@mui/material';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
-const Dropdown = () => {
+const Dropdown = ({ onApplyFilters }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [location, setLocation] = useState('');
-  const [startDate, setStartDate] = useState(null); // State for the start date
-  const [endDate, setEndDate] = useState(null); // State for the end date
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  const handleStartTimeChange = (e) => setStartTime(e.target.value);
-  const handleEndTimeChange = (e) => setEndTime(e.target.value);
-  const handleLocationChange = (e) => setLocation(e.target.value);
+  const handleApplyFilters = () => {
+    const filters = {
+      startDate,
+      endDate,
+      startTime,
+      endTime,
+      location
+    };
+    // Call the callback function with the current filter values
+    console.log(filters)
+    // onApplyFilters(filters);
+  };
 
   return (
     <div className="filter-wrapper">
@@ -25,8 +34,8 @@ const Dropdown = () => {
         Event Filters
         <FontAwesomeIcon style={{ float: 'right' }} icon={isOpen ? faCaretUp : faCaretDown} />
       </div>
-      <div className="dropdown">
-        {isOpen && (
+      {isOpen && (
+        <div className="dropdown">
           <ul className="filter-list">
             <li>
               <label htmlFor="startDate">Start Date:</label>
@@ -35,7 +44,7 @@ const Dropdown = () => {
                 onChange={(date) => setStartDate(date)}
                 dateFormat="yyyy-MM-dd"
                 placeholderText="Select Start Date"
-                className="date-picker-input"
+                className="input-field"
               />
             </li>
             <li>
@@ -45,7 +54,7 @@ const Dropdown = () => {
                 onChange={(date) => setEndDate(date)}
                 dateFormat="yyyy-MM-dd"
                 placeholderText="Select End Date"
-                className="date-picker-input"
+                className="input-field"
               />
             </li>
             <li>
@@ -54,9 +63,10 @@ const Dropdown = () => {
                 type="time"
                 id="startTime"
                 value={startTime}
-                onChange={handleStartTimeChange}
-                step="3600" // Hourly steps
+                onChange={(e) => setStartTime(e.target.value)}
+                step="3600"
                 placeholder="hh:mm am/pm"
+                className="input-field"
               />
             </li>
             <li>
@@ -65,9 +75,10 @@ const Dropdown = () => {
                 type="time"
                 id="endTime"
                 value={endTime}
-                onChange={handleEndTimeChange}
-                step="3600" // Hourly steps
+                onChange={(e) => setEndTime(e.target.value)}
+                step="3600"
                 placeholder="hh:mm am/pm"
+                className="input-field"
               />
             </li>
             <li>
@@ -75,7 +86,8 @@ const Dropdown = () => {
               <select
                 id="location"
                 value={location}
-                onChange={handleLocationChange}
+                onChange={(e) => setLocation(e.target.value)}
+                className="input-field"
               >
                 <option value="">Select Location</option>
                 <option value="mn">MN</option>
@@ -86,26 +98,35 @@ const Dropdown = () => {
                 <option value="dv">DV</option>
               </select>
             </li>
-            <li>
-              <input type="text" placeholder="Enter custom filter" />
-            </li>
             <Button
               variant="contained"
               sx={{
-                fontFamily: "Sen", // Custom font
-                backgroundColor: "#06169c", // Button color
-                color: "white", // Text color
-                fontWeight: "bold", // Bold text
-                "&:hover": { 
-                  backgroundColor: "#020733", // Hover color
-                },
+                fontFamily: "Sen",
+                backgroundColor: "#06169c",
+                color: "white",
+                fontWeight: "bold",
+                "&:hover": { backgroundColor: "#020733" },
               }}
+              onClick={handleApplyFilters}
             >
               Apply Filters
             </Button>
+            <Button
+              variant="contained"
+              sx={{
+                fontFamily: "Sen",
+                backgroundColor: "#06169c",
+                color: "white",
+                fontWeight: "bold",
+                "&:hover": { backgroundColor: "#020733" },
+              }}
+              onClick={handleApplyFilters}
+            >
+              Clear Filters
+            </Button>
           </ul>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
