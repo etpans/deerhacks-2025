@@ -18,7 +18,7 @@ def startup():
     mydb = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="1234",
+        password="BlueLemonadeCats87/",
         database="utm_website"
         )
     mycursor = mydb.cursor()
