@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request
 import mysql.connector
 from testingSQL import startup, get_map, get_filtered_data, get_search_data
 import datetime
