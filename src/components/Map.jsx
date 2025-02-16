@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 
 // Importing individual icons
@@ -33,7 +33,7 @@ const Map = () => {
     ];
 
     return (
-        <MapContainer center={position} zoom={16} style={{ width: '100%', height: '100vh' }}>
+        <MapContainer center={position} zoom={16} style={{ width: '100%', height: '100%' }}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
             {locations.map((location, index) => (
@@ -46,6 +46,7 @@ const Map = () => {
                     }}
                 >
                     <Popup>{location.name}</Popup>
+                    <Tooltip direction="top" offset={[-10, -20]} permanent>{index + 1} events</Tooltip> {/* Tooltip with number */}
                 </Marker>
             ))}
         </MapContainer>

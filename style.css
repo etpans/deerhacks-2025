@@ -141,16 +141,10 @@
     text-align: center;
 }
 
-.main-title {
-
-}
-
-
-
 /* EVENTS */
 .event-wrapper {
     display: flex;
-    height: 100%;
+    min-height: 100vh;
     background-color: white;
 }
 
@@ -161,13 +155,12 @@
     background-color: var(--background-light);
     padding: 15px;
     justify-content: flex-start;
-
 }
 
 .event-column-title {
     width: 100%;
     padding-bottom: 16px;
-    color: black
+    color: black;
 }
 
 .events-right {
@@ -179,11 +172,10 @@
 
 .event-widget-wrapper {
     margin: 10px 0;
-    padding: 10px 0;
+    padding: 10px 5px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 12px; 
     display: flex;
-    flex-direction: column;
     align-items: center;
 }
 
@@ -198,6 +190,7 @@
     font-size: 16px;
     font-weight: bold;
     color: black;
+    margin-left: 10px; /* Adjusted this value to move the title left */
 }
 
 .event-widget-date {
@@ -209,7 +202,6 @@
     font-size: 12px;
     margin-top: 8px;
     color: black;
-
 }
 
 .event-widget-location {
@@ -217,7 +209,6 @@
     font-style: italic;
     margin-top: 4px;
     color: black;
-
 }
 
 .event-widget-link {
@@ -229,13 +220,19 @@
 }
 
 .scrollable-container {
-    max-height: 400px; /* Set a fixed height for the scrolling container */
+    max-height: 80%; /* Set a fixed height for the scrolling container */
     overflow-y: auto; /* Enable vertical scrolling */
     padding: 10px; /* Optional: Add padding if needed */
 }
 
-.scrollable-container event-widget-wrapper:last-child {
-    margin-bottom: 100px;
+.scrollable-container .event-widget-wrapper:last-child {
+    margin-bottom: 150px;
+}
+
+.event-results {
+    color: black;
+    margin-top: 10px;
+    padding-bottom: 5px;
 }
 
 /* MAP STYLES */
@@ -296,9 +293,9 @@
     margin: 0 auto;
     width: 95%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .search-input {
+}
+
+.search-input {
     border: none;
     outline: none;
     padding: 8px;
@@ -307,13 +304,13 @@
     background-color: transparent;
     color: #333;
     transition: all 0.3s ease;
-  }
-  
-  .search-input::placeholder {
+}
+
+.search-input::placeholder {
     color: #aaa;
-  }
-  
-  .search-button {
+}
+
+.search-button {
     background-color: #007bff;
     border: none;
     padding: 8px 15px;
@@ -326,23 +323,39 @@
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-  }
-  
-  .search-button:hover {
+}
+
+.search-button:hover {
     background-color: #0056b3;
-  }
-  
-  .search-button:focus {
+}
+
+.search-button:focus {
     outline: none;
-  }
-  
-  .input-field {
+}
+
+.input-field {
     background-color: #f7f7f7;
     color: black;
     border: 0;
     padding: 0 5px;
     float: right;
-  }
-  
+}
 
-  
+.datepicker-wrapper {
+    float: right;
+}
+
+/* Add this CSS to style the tooltip as a red circle with a white number */
+.custom-tooltip {
+    background-color: red;
+    color: white;
+    font-size: 16px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+

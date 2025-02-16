@@ -24,8 +24,17 @@ const Dropdown = ({ onApplyFilters }) => {
       location
     };
     // Call the callback function with the current filter values
-    console.log(filters)
+    console.log(filters);
     // onApplyFilters(filters);
+  };
+
+  const handleClearFilters = () => {
+    // Reset all states to their initial values
+    setStartTime('');
+    setEndTime('');
+    setLocation('');
+    setStartDate(null);
+    setEndDate(null);
   };
 
   return (
@@ -39,23 +48,27 @@ const Dropdown = ({ onApplyFilters }) => {
           <ul className="filter-list">
             <li>
               <label htmlFor="startDate">Start Date:</label>
-              <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-                dateFormat="yyyy-MM-dd"
-                placeholderText="Select Start Date"
-                className="input-field"
-              />
+              <div className="datepicker-wrapper">
+                <DatePicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    dateFormat="yyyy-MM-dd"
+                    placeholderText="Select Start Date"
+                    className="input-field"
+                />
+              </div>
             </li>
             <li>
-              <label htmlFor="endDate">End Date:</label>
-              <DatePicker
-                selected={endDate}
-                onChange={(date) => setEndDate(date)}
-                dateFormat="yyyy-MM-dd"
-                placeholderText="Select End Date"
-                className="input-field"
-              />
+                <label htmlFor="endDate">End Date:</label>
+                <div className="datepicker-wrapper">
+                    <DatePicker
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                    dateFormat="yyyy-MM-dd"
+                    placeholderText="Select End Date"
+                    className="input-field"
+                    />
+                </div>
             </li>
             <li>
               <label htmlFor="startTime">Start Time:</label>
@@ -98,6 +111,7 @@ const Dropdown = ({ onApplyFilters }) => {
                 <option value="dv">DV</option>
               </select>
             </li>
+            <div style={{ display: 'flex', gap: '10px', marginTop: '10px', marginBottom: '10px', marginRight: '10px' }}>
             <Button
               variant="contained"
               sx={{
@@ -106,10 +120,11 @@ const Dropdown = ({ onApplyFilters }) => {
                 color: "white",
                 fontWeight: "bold",
                 "&:hover": { backgroundColor: "#020733" },
+                width: '50%',  // Full width button
               }}
               onClick={handleApplyFilters}
             >
-              Apply Filters
+              Apply
             </Button>
             <Button
               variant="contained"
@@ -119,11 +134,14 @@ const Dropdown = ({ onApplyFilters }) => {
                 color: "white",
                 fontWeight: "bold",
                 "&:hover": { backgroundColor: "#020733" },
+                width: '50%',  // Full width button
               }}
-              onClick={handleApplyFilters}
+              onClick={handleClearFilters}
             >
-              Clear Filters
+              Clear
             </Button>
+          </div>
+
           </ul>
         </div>
       )}
