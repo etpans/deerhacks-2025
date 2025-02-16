@@ -1,20 +1,45 @@
-# React + Vite
+# Unite™ - Interactive Event Discovery for UofT
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Unite™ is a simple and interactive event discovery platform designed to help University of Toronto students stay informed about important events and dates on campus. With an intuitive interface and an interactive map, students can easily navigate campus and connect with their community.
 
-Currently, two official plugins are available:
+This project was developed for **DeerHacks 2025**, with the theme of **Discovery**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- **Frontend**: React + Vite
+- **Backend**: Python + Flask
+- **Database**: MySQL
 
-### Installation
+## Installation
 
-1. Clone the repository:
-   `git clone https://github.com/etpans/deerhacks-2025.git`
-   `cd deerhacks-2025`
+### Prerequisites
+Ensure you have the following installed on your machine:
+- [Node.js](https://nodejs.org/) (v16+ recommended)
+- [Python](https://www.python.org/) (v3.8+ recommended)
+- [MySQL](https://www.mysql.com/) (for database setup later)
 
-2. Install dependencies:
-   `npm install`
+### Setup Instructions
 
-3. Start the development server:
-   `npm run dev`
+#### 1. Clone the repository
+```sh
+git clone https://github.com/etpans/deerhacks-2025.git
+cd deerhacks-2025
+```
+
+#### 2. Install Dependencies
+```sh
+npm install
+cd ../flask_app
+pip install -r requirements.txt
+```
+
+#### 2. Starting Servers
+Front-end:
+```sh
+cd deerhacks-2025
+npm run dev
+```
+Back-end:
+```sh
+cd flask_app
+python app.py
+```
