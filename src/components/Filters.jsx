@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { Button } from '@mui/material';
@@ -15,47 +15,6 @@ const Dropdown = ({ onApplyFilters }) => {
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  //for setting <data> to whatever the fetch call returns
-  const [count, setCount] = useState([]);
-  let data = [];
-
-  const applyFilters = async (filters) => {
-        try {
-          let extension = `/filter?startDate=${filters['startDateStr']}&endDate=${filters['endDateStr']}&startTime=${filters['startTimeStr']}&endTime=${filters['endTimeStr']}&loc=${filters['location']}`;
-          console.log(extension)
-          let url = 'http://127.0.0.1:5000' + extension
-          const response = await fetch(url);
-          const itemData = await response.json();
-          setCount(itemData);
-          data = count;
-          console.log(data);
-        }
-        catch(error){console.log(error)}
-      }
-  
-      useEffect(() => {
-        applyFilters();
-      }, []);
-
-  const handleApplyFilters = () => {
-    let startDateStr = new Date(startDate).toLocaleDateString('en-US');
-    let endDateStr = new Date(endDate).toLocaleDateString('en-US');
-    let startTimeStr = new Time(startTime).toLocaleTimeString('it-IT');
-    let endTimeStr = new Time(endTime).toLocaleTimeString('it-IT');
-
-    const filters = {
-      startDateStr,
-      endDateStr,
-      startTimeStr,
-      endTimeStr,
-      location
-    };
-    //APPLY FILTERS HERE
-
-
-    // Call the callback function with the current filter values
-    console.log(filters)
-    applyFilters(filters);
   const handleApplyFilters = () => {
     const filters = {
       startDate,
@@ -65,8 +24,8 @@ const Dropdown = ({ onApplyFilters }) => {
       location
     };
     // Call the callback function with the current filter values
-    console.log(filters);
-    // onApplyFilters(filters);
+    // console.log(filters);
+    onApplyFilters(filters);
   };
 
   const handleClearFilters = () => {
@@ -76,6 +35,7 @@ const Dropdown = ({ onApplyFilters }) => {
     setLocation('');
     setStartDate(null);
     setEndDate(null);
+    onApplyFilters({ startDate: null, endDate: null, startTime: '', endTime: '', location: '' }); // Reset filter
   };
 
   return (
@@ -152,6 +112,7 @@ const Dropdown = ({ onApplyFilters }) => {
                 <option value="dv">DV</option>
               </select>
             </li>
+            <div style={{ display: 'flex', gap: '10px', marginTop: '10px', marginBottom: '10px', marginRight: '10px' }}>
             <Button
               variant="contained"
               sx={{
@@ -181,6 +142,7 @@ const Dropdown = ({ onApplyFilters }) => {
               Apply
             </Button>
           </div>
+
           </ul>
         </div>
       )}

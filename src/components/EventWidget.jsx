@@ -1,21 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as emptyHeart, faHeart as filledHeart } from '@fortawesome/free-solid-svg-icons';
-import Filters from './Filters';
+import Dropdown from './Filters';
 import Search from './Search';
-
-const eventsData = [
-  { id: 1, title: "Tech Conference 2025", date: "March 10, 2025", description: "A global conference on emerging technologies", location: "San Francisco, CA", hyperlink: "https://techconference2025.com" },
-  { id: 2, title: "AI Summit 2025", date: "April 15, 2025", description: "Discussing the future of artificial intelligence", location: "New York, NY", hyperlink: "https://aisummit2025.com" },
-  { id: 3, title: "Blockchain Expo", date: "June 20, 2025", description: "Exploring the latest in blockchain technology", location: "Los Angeles, CA", hyperlink: "https://blockchainexpo2025.com" }
-];
 
 function EventWidget() {
   const [likedEvents, setLikedEvents] = useState({});
-  const [filteredEvents, setFilteredEvents] = useState(eventsData);
+  const [filteredEvents, setFilteredEvents] = useState([]);
   const [showFavourites, setShowFavourites] = useState(false);
+  const [eventsData, setEventsData] = useState([]);
+  const [filters, setFilters] = useState({ startDate: null, endDate: null, startTime: '', endTime: '', location: '' });
 
-  // Load stored likes on mount
+  const fetchMap = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/');
+      const itemData = await response.json();
+      setEventsData(itemData[1]); // Extract the event data from the fetched data
+      setFilteredEvents(itemData[1]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchMap();
+  }, []);
+
   useEffect(() => {
     const storedLikes = localStorage.getItem('likedEvents');
     if (storedLikes) {
@@ -23,41 +33,63 @@ function EventWidget() {
     }
   }, []);
 
-  // Toggle like/unlike event and update storage
-  const toggleLike = (eventId) => {
+  const toggleLike = (eventName) => {
     setLikedEvents((prevState) => {
-      const updatedLikes = { ...prevState, [eventId]: !prevState[eventId] };
+      const updatedLikes = { ...prevState, [eventName]: !prevState[eventName] };
       localStorage.setItem('likedEvents', JSON.stringify(updatedLikes));
       return updatedLikes;
     });
   };
 
-  // Handle search filter
+  const applyFilters = () => {
+    let filtered = eventsData;
+
+    if (filters.startDate) {
+      filtered = filtered.filter(event => new Date(event.date) >= filters.startDate);
+    }
+    if (filters.endDate) {
+      filtered = filtered.filter(event => new Date(event.date) <= filters.endDate);
+    }
+    if (filters.startTime) {
+      filtered = filtered.filter(event => event.start_time >= filters.startTime);
+    }
+    if (filters.endTime) {
+      filtered = filtered.filter(event => event.end_time <= filters.endTime);
+    }
+    if (filters.location) {
+      filtered = filtered.filter(event => event.loc === filters.location.toUpperCase());
+    }
+
+    setFilteredEvents(filtered);
+  };
+
+  useEffect(() => {
+    applyFilters();
+  }, [filters, eventsData]);
+
   const handleSearch = (searchTerm) => {
     if (searchTerm === '') {
       setFilteredEvents(eventsData);
     } else {
       const filtered = eventsData.filter(event =>
-        event.title.toLowerCase().includes(searchTerm.toLowerCase())
+        event.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setFilteredEvents(filtered);
     }
   };
 
-  // Toggle favourite filter
   const toggleFavourites = () => {
     setShowFavourites(prevState => !prevState);
   };
 
-  // Apply favourite filter
   const displayedEvents = showFavourites
-    ? filteredEvents.filter(event => likedEvents[event.id])
+    ? filteredEvents.filter(event => likedEvents[event.name])
     : filteredEvents;
 
   return (
     <>
       <Search onSearch={handleSearch} />
-      <Filters />
+      <Dropdown onApplyFilters={setFilters} />
       <div className="event-results title">
         Results: {displayedEvents.length} 
         <button 
@@ -77,12 +109,12 @@ function EventWidget() {
       </div>
       <div className="scrollable-container">
         {displayedEvents.map(event => (
-          <div key={event.id} className="event-widget-wrapper" style={{ position: 'relative' }}>
+          <div key={event.name} className="event-widget-wrapper" style={{ position: 'relative' }}>
             <div className="event-widget-content">
               <div className="event-widget-title title">
-                {event.title}
+                {event.name}
                 <button 
-                  onClick={() => toggleLike(event.id)} 
+                  onClick={() => toggleLike(event.name)} 
                   className="like-button"
                   style={{
                     background: 'none',
@@ -95,18 +127,18 @@ function EventWidget() {
                   }}
                 >
                   <FontAwesomeIcon 
-                    icon={likedEvents[event.id] ? filledHeart : emptyHeart} 
+                    icon={likedEvents[event.name] ? filledHeart : emptyHeart} 
                     style={{ 
-                      color: likedEvents[event.id] ? 'red' : 'gray', 
+                      color: likedEvents[event.name] ? 'red' : 'gray', 
                       fontSize: '24px' 
                     }} 
                   />
                 </button>
               </div>
-              <div className="event-widget-date">{event.date}</div>
-              <div className="event-widget-description">{event.description}</div>
-              <div className="event-widget-location">{event.location}</div>
-              <a href={event.hyperlink} target="_blank" rel="noopener noreferrer" className="event-widget-link">More Info</a>
+              <div className="event-widget-date">{new Date(event.date).toDateString()}</div>
+              <div className="event-widget-description">{event.desc}</div>
+              <div className="event-widget-location">Location: {event.loc}</div>
+              <div className="event-widget-time">Time: {event.start_time} - {event.end_time}</div>
             </div>
           </div>
         ))}

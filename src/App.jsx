@@ -4,6 +4,7 @@ import NavBar from './components/NavBar';
 import LandingContent from './components/Landing';
 import Events from './components/Events';
 import 'leaflet/dist/leaflet.css';
+import EventWidget from './components/EventWidget';
 
 function App() {
     // Check localStorage for saved state on initial render
@@ -14,32 +15,6 @@ function App() {
         // Store the tab state in localStorage whenever it changes
         localStorage.setItem('showEvents', showEvents);
     }, [showEvents]);
-    
-    const [count, setCount] = useState("");
-    let data = [];
-    let counting = 0;
-
-    const fetchMap = async () => {
-      try {
-        const response = await fetch('http://127.0.0.1:5000');
-        const itemData = await response.json();
-        setCount(itemData);
-        data = count;
-        console.log(data);
-      }
-      catch(error){console.log(error)}
-    }
-
-    useEffect(() => {
-      fetchMap();
-    }, []);
-
-    // if (counting < 1){
-    //   fetchMap();
-    //   counting += 1;
-    // }
-      
-
 
     return (
         <>

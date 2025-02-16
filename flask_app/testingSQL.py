@@ -4,8 +4,8 @@ import datetime
 mydb =  None
 mycursor = None
 locations = []
-location = "IB"
-start_date = "2025-02-14"
+location = None
+start_date = "2025-02-13"
 end_date = "2025-02-15"
 start_time = None
 # date = datetime.datetime.today().strftime("%Y-%m-%d")
@@ -18,7 +18,7 @@ def startup():
     mydb = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="BlueLemonadeCats87/",
+        password="1234",
         database="utm_website"
         )
     mycursor = mydb.cursor()
@@ -35,13 +35,19 @@ def startup():
 def get_map():
     global location, start_date, end_date, start_time, end_time, search
     #count number of events for each location_id
+    print(location)
+    print(start_date)
+    print(end_date)
+    print(start_time)
+    print(end_time)
+    print(search)
     location_freq = []
-    for location in locations:
+    for i in range(len(locations)):
         sql = ("SELECT COUNT(*) AS `Number of events` FROM events WHERE event_loc = %s")
-        val = [location]
+        val = [locations[i]]
         mycursor.execute(sql, val)
         result = mycursor.fetchall()
-        location_freq.append((f"{location} : {result[0][0]}"))
+        location_freq.append((f"{locations[i]} : {result[0][0]}"))
 
     result = get_filters(location, start_date, end_date, start_time, end_time, search)
     return [location_freq, result]
@@ -59,8 +65,6 @@ def get_search_data(query: str):
     global search, location
     if query != "undefined":
         search = query.split()
-    
-    location = "IB"
     print(location)
     print(start_date)
     print(end_date)
@@ -92,12 +96,12 @@ def get_filters(location: str, start_date: str, end_date: str, start_time: str, 
         mycursor.execute(sql)
     mydb.commit()
     if start_date is not None:
-        sql = ("DELETE FROM filtered_table WHERE event_date < %s")
+        sql = ("DELETE FROM filtered_table WHERE DATE(event_date) < DATE(%s)")
         val = [start_date]
         mycursor.execute(sql, val)
     mydb.commit()
     if end_date is not None:
-        sql = ("DELETE FROM filtered_table WHERE event_date > %s")
+        sql = ("DELETE FROM filtered_table WHERE DATE(event_date) > DATE(%s)")
         val = [end_date]
         mycursor.execute(sql, val)
     mydb.commit()
@@ -164,8 +168,7 @@ def get_user_events(user_id: int):
 
 
 def testing_stuff():
-    v = "datetime.date(1,1,1)"
-    print(v)
+    return get_map()
     # print(get_search_data("midterm"))
     # print(get_filters(None, "2025-02-14", None, None, ["midterm", "draw"]))
 
@@ -183,6 +186,6 @@ if __name__ == "__main__":
     # print(result_to_eventlist([(1,"DH", "make trains", "train modeling club", "18:00:00", "20:00:00"), (1,"DH", "make trains", "train modeling club", "18:00:00", "20:00:00")]))
     # print(result_to_eventlist([(1,"DH", "make trains", "train modeling club", "18:00:00", "20:00:00"), (1,"DH", "make trains", "train modeling club", "18:00:00", "20:00:00")]))
     startup()
-    testing_stuff()
+    print(testing_stuff())
     # startup()
     # print(get_map())

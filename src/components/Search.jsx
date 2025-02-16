@@ -8,44 +8,33 @@ function Search({ onSearch }) {
   const [query, setQuery] = useState('');
   const [count, setCount] = useState([]);
 
-  const applySearch = async (query) => {
-        try {
-          let extension = `/search?query=${query}`;
-          let url = 'http://127.0.0.1:5000' + extension;
-          const response = await fetch(url);
-          const itemData = await response.json();
-          setCount(itemData);
-          data = count;
-          console.log(data);
-        }
-        catch(error){console.log(error)}
-      }
+  // const applySearch = async (query) => {
+  //       try {
+  //         let extension = `/search?query=${query}`;
+  //         let url = 'http://127.0.0.1:5000' + extension;
+  //         const response = await fetch(url);
+  //         const itemData = await response.json();
+  //         setCount(itemData);
+  //         data = count;
+  //         console.log(data);
+  //       }
+  //       catch(error){console.log(error)}
+  //     }
   
-  useEffect(() => {
-    applySearch();
-  }, []);
-
-  const handleChange = (event) => {
-    setQuery(event.target.value);
-    
-  };
+  // useEffect(() => {
+  //   applySearch();
+  // }, []);
 
   const handleSearch = () => {
     console.log(query)
     applySearch(query);
     //search function here
+  }
     
-function Search({ onSearch }) {
-  const [query, setQuery] = useState('');
-
   const handleChange = (event) => {
     const value = event.target.value;
     setQuery(value);
     onSearch(value); // Pass the latest input value directly
-  };
-
-  const handleSearch = () => {
-    onSearch(query); // Now the search button also triggers filtering
   };
 
   return (
