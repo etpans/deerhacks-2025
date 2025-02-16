@@ -294,8 +294,8 @@
     margin: 0 auto;
     width: 95%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
+  }
+  
 .search-input {
     border: none;
     outline: none;
@@ -305,8 +305,12 @@
     background-color: transparent;
     color: #333;
     transition: all 0.3s ease;
-}
-
+  }
+  
+  .search-input::placeholder {
+    color: #aaa;
+  }
+  
 .search-input::placeholder {
     color: #aaa;
 }
@@ -324,6 +328,15 @@
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+  }
+  
+  .search-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .search-button:focus {
+    outline: none;
+  }
 }
 
 .search-button:hover {
@@ -340,8 +353,7 @@
     border: 0;
     padding: 0 5px;
     float: right;
-}
-
+  }
 .datepicker-wrapper {
     float: right;
 }

@@ -1,8 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Button } from '@mui/material';
+import { Button } from '@mui/material'; // Import Material-UI Button
 
+function Search({ onSearch }) {
+  let data = [];
+  const [query, setQuery] = useState('');
+  const [count, setCount] = useState([]);
+
+  const applySearch = async (query) => {
+        try {
+          let extension = `/search?query=${query}`;
+          let url = 'http://127.0.0.1:5000' + extension;
+          const response = await fetch(url);
+          const itemData = await response.json();
+          setCount(itemData);
+          data = count;
+          console.log(data);
+        }
+        catch(error){console.log(error)}
+      }
+  
+  useEffect(() => {
+    applySearch();
+  }, []);
+
+  const handleChange = (event) => {
+    setQuery(event.target.value);
+    
+  };
+
+  const handleSearch = () => {
+    console.log(query)
+    applySearch(query);
+    //search function here
+    
 function Search({ onSearch }) {
   const [query, setQuery] = useState('');
 
