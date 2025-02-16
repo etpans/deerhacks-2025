@@ -143,6 +143,9 @@ def result_to_eventlist(result: list[tuple]):
 def format_time(timeDelta: datetime.timedelta):
     return timeDelta
 
+def format_time(timeDelta: datetime.timedelta):
+    return timeDelta
+
 def add_timetable():
     pass
 
@@ -178,6 +181,7 @@ def seconds_to_time(time_delta: datetime.timedelta):
     return f"{hours:02}:{minutes:02}:{seconds:02}"
     
 if __name__ == "__main__":
+    # print(result_to_eventlist([(1,"DH", "make trains", "train modeling club", "18:00:00", "20:00:00"), (1,"DH", "make trains", "train modeling club", "18:00:00", "20:00:00")]))
     # print(result_to_eventlist([(1,"DH", "make trains", "train modeling club", "18:00:00", "20:00:00"), (1,"DH", "make trains", "train modeling club", "18:00:00", "20:00:00")]))
     startup()
     testing_stuff()
