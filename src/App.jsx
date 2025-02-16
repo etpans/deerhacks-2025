@@ -1,13 +1,20 @@
-import { useState , useEffect } from 'react'
-import './App.css'
-import NavBar from './components/NavBar'
-import LandingContent from './components/Landing'
-import Events from './components/Events'
-import EventWidget from './components/EventWidget'
+import { useState, useEffect } from 'react';
+import './App.css';
+import NavBar from './components/NavBar';
+import LandingContent from './components/Landing';
+import Events from './components/Events';
 import 'leaflet/dist/leaflet.css';
 
 function App() {
-    const [showEvents, setShowEvents] = useState(false);
+    // Check localStorage for saved state on initial render
+    const savedTabState = localStorage.getItem('showEvents');
+    const [showEvents, setShowEvents] = useState(savedTabState === 'true');
+
+    useEffect(() => {
+        // Store the tab state in localStorage whenever it changes
+        localStorage.setItem('showEvents', showEvents);
+    }, [showEvents]);
+    
     const [count, setCount] = useState("");
     let data = [];
     let counting = 0;

@@ -20,6 +20,7 @@ function LandingContent({onShowEvents}) {
                             fontWeight: "bold",  // Increase font weight
                             "&:hover": { backgroundColor: "#020733" },
                         }}
+                        onClick={onShowEvents}
                         >
                         Find Events
                     </Button>

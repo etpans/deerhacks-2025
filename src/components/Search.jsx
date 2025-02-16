@@ -1,34 +1,3 @@
-// import React, { useState } from 'react';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faSearch } from '@fortawesome/free-solid-svg-icons';
-
-
-// function Search({ onSearch }) {
-//   const [query, setQuery] = useState('');
-
-//   const handleChange = (event) => {
-//     const newQuery = event.target.value;
-//     console.log(newQuery)
-//     setQuery(newQuery);
-//     // onSearch(newQuery);  // Automatically trigger search with each keystroke
-//   };
-
-//   return (
-//     <div className="search-container">
-//       <FontAwesomeIcon style={{color: 'grey'}} icon={faSearch} className="search-icon" />
-//       <input
-//         type="text"
-//         value={query}
-//         onChange={handleChange}
-//         placeholder="Search..."
-//         className="search-input"
-//       />
-//     </div>
-//   );
-// }
-
-// export default Search;
-
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -66,6 +35,17 @@ function Search({ onSearch }) {
     applySearch(query);
     //search function here
     
+function Search({ onSearch }) {
+  const [query, setQuery] = useState('');
+
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setQuery(value);
+    onSearch(value); // Pass the latest input value directly
+  };
+
+  const handleSearch = () => {
+    onSearch(query); // Now the search button also triggers filtering
   };
 
   return (
@@ -80,23 +60,21 @@ function Search({ onSearch }) {
       <Button
         onClick={handleSearch}
         className="search-button"
-        variant="contained" // Material-UI style
+        variant="contained"
         sx={{
-          backgroundColor: '#0c1456', // Background color
-          color: 'white', // Text color
-          '&:hover': { backgroundColor: '#020733' }, // Hover effect
-          borderRadius: '50%', // Make the button round
-          minWidth: '40px', // Set minimum width for a circular button
-          height: '40px', // Set height for circular shape
-          padding: 0, // Remove extra padding
+          backgroundColor: '#0c1456',
+          color: 'white',
+          '&:hover': { backgroundColor: '#020733' },
+          borderRadius: '50%',
+          minWidth: '40px',
+          height: '40px',
+          padding: 0,
         }}
       >
-        <FontAwesomeIcon style={{ color: 'white', fontSize: '20px' }} icon={faSearch} className="search-icon" />
+        <FontAwesomeIcon style={{ color: 'white', fontSize: '20px' }} icon={faSearch} />
       </Button>
     </div>
   );
 }
 
 export default Search;
-
-

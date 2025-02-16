@@ -6,7 +6,6 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
 const Dropdown = ({ onApplyFilters }) => {
-
   const [isOpen, setIsOpen] = useState(false);
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
@@ -57,6 +56,26 @@ const Dropdown = ({ onApplyFilters }) => {
     // Call the callback function with the current filter values
     console.log(filters)
     applyFilters(filters);
+  const handleApplyFilters = () => {
+    const filters = {
+      startDate,
+      endDate,
+      startTime,
+      endTime,
+      location
+    };
+    // Call the callback function with the current filter values
+    console.log(filters);
+    // onApplyFilters(filters);
+  };
+
+  const handleClearFilters = () => {
+    // Reset all states to their initial values
+    setStartTime('');
+    setEndTime('');
+    setLocation('');
+    setStartDate(null);
+    setEndDate(null);
   };
 
   return (
@@ -70,23 +89,27 @@ const Dropdown = ({ onApplyFilters }) => {
           <ul className="filter-list">
             <li>
               <label htmlFor="startDate">Start Date:</label>
-              <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-                dateFormat="yyyy-MM-dd"
-                placeholderText="Select Start Date"
-                className="input-field"
-              />
+              <div className="datepicker-wrapper">
+                <DatePicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    dateFormat="yyyy-MM-dd"
+                    placeholderText="Select Start Date"
+                    className="input-field"
+                />
+              </div>
             </li>
             <li>
-              <label htmlFor="endDate">End Date:</label>
-              <DatePicker
-                selected={endDate}
-                onChange={(date) => setEndDate(date)}
-                dateFormat="yyyy-MM-dd"
-                placeholderText="Select End Date"
-                className="input-field"
-              />
+                <label htmlFor="endDate">End Date:</label>
+                <div className="datepicker-wrapper">
+                    <DatePicker
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                    dateFormat="yyyy-MM-dd"
+                    placeholderText="Select End Date"
+                    className="input-field"
+                    />
+                </div>
             </li>
             <li>
               <label htmlFor="startTime">Start Time:</label>
@@ -137,10 +160,11 @@ const Dropdown = ({ onApplyFilters }) => {
                 color: "white",
                 fontWeight: "bold",
                 "&:hover": { backgroundColor: "#020733" },
+                width: '50%',  // Full width button
               }}
-              onClick={handleApplyFilters}
+              onClick={handleClearFilters}
             >
-              Apply Filters
+              Clear
             </Button>
             <Button
               variant="contained"
@@ -150,11 +174,13 @@ const Dropdown = ({ onApplyFilters }) => {
                 color: "white",
                 fontWeight: "bold",
                 "&:hover": { backgroundColor: "#020733" },
+                width: '50%',  // Full width button
               }}
               onClick={handleApplyFilters}
             >
-              Clear Filters
+              Apply
             </Button>
+          </div>
           </ul>
         </div>
       )}
