@@ -122,9 +122,9 @@ const Dropdown = ({ onApplyFilters }) => {
                 "&:hover": { backgroundColor: "#020733" },
                 width: '50%',  // Full width button
               }}
-              onClick={handleApplyFilters}
+              onClick={handleClearFilters}
             >
-              Apply
+              Clear
             </Button>
             <Button
               variant="contained"
@@ -136,9 +136,9 @@ const Dropdown = ({ onApplyFilters }) => {
                 "&:hover": { backgroundColor: "#020733" },
                 width: '50%',  // Full width button
               }}
-              onClick={handleClearFilters}
+              onClick={handleApplyFilters}
             >
-              Clear
+              Apply
             </Button>
           </div>
 

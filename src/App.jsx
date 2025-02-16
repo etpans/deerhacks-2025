@@ -15,6 +15,7 @@ function App() {
         // Store the tab state in localStorage whenever it changes
         localStorage.setItem('showEvents', showEvents);
     }, [showEvents]);
+    
     const [count, setCount] = useState("");
 
       const fetchMap = async () => {
