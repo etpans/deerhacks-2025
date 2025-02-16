@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 import mysql.connector
-from testingSQL import startup, get_map, get_filters
+from testingSQL import startup, get_map, get_filtered_data, get_search_data
+import datetime
 
 app = Flask(__name__)
 
@@ -15,19 +16,30 @@ locations = []
 
 @app.route("/")
 def home():
-    return jsonify(get_map)
+    #return jsonify(datetime.date(1,1,1))
+    startup()
+    return jsonify(get_map())
 
 @app.route("/filter", methods=['GET'])
 def filter():
     if request.method == 'GET':
-        location = request.args["loc"]
-        date = request.args["date"]
-        start_time = request.args["start_time"]
-        end_time = request.args["end_time"]
-        searches = request.args["search"].split()
+        location = request.args["location"]
+        date = request.args["startDate"]
+        start_time = request.args["startTime"]
+        end_time = request.args["endTime"]
     
-    events = get_filters(location, date, start_time, end_time, searches)
+    events = get_filtered_data(location, date, start_time, end_time)
     return jsonify(events)
+
+@app.route("/search", methods=['GET'])
+def search():
+    if request.method == 'GET':
+        query = request.args["query"]
+    
+    events = get_search_data(query)
+    return jsonify(events)
+    # events = get_search(query)
+    # return jsonify(events)
 
 if __name__ == "__main__":
     app.run()

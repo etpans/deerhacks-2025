@@ -5,24 +5,34 @@ import LandingContent from './components/Landing'
 import Events from './components/Events'
 import EventWidget from './components/EventWidget'
 import 'leaflet/dist/leaflet.css';
-import EventWidget from './components/EventWidget';
 
 function App() {
     const [showEvents, setShowEvents] = useState(false);
     const [count, setCount] = useState("");
+    let data = [];
+    let counting = 0;
 
-      const fetchMap = async () => {
-        try {
-          const response = await fetch('http://127.0.0.1:5000/map');
-          const itemData = await response.json();
-          setCount(itemData);
-        }
-        catch(error){console.log(error)}
+    const fetchMap = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:5000');
+        const itemData = await response.json();
+        setCount(itemData);
+        data = count;
+        console.log(data);
       }
+      catch(error){console.log(error)}
+    }
 
-      useEffect(() => {
-        fetchMap();
-      }, []);
+    useEffect(() => {
+      fetchMap();
+    }, []);
+
+    // if (counting < 1){
+    //   fetchMap();
+    //   counting += 1;
+    // }
+      
+
 
     return (
         <>

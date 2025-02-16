@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { Button } from '@mui/material';
@@ -6,6 +6,7 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
 const Dropdown = ({ onApplyFilters }) => {
+
   const [isOpen, setIsOpen] = useState(false);
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
@@ -15,17 +16,47 @@ const Dropdown = ({ onApplyFilters }) => {
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
+  //for setting <data> to whatever the fetch call returns
+  const [count, setCount] = useState([]);
+  let data = [];
+
+  const applyFilters = async (filters) => {
+        try {
+          let extension = `/filter?startDate=${filters['startDateStr']}&endDate=${filters['endDateStr']}&startTime=${filters['startTimeStr']}&endTime=${filters['endTimeStr']}&loc=${filters['location']}`;
+          console.log(extension)
+          let url = 'http://127.0.0.1:5000' + extension
+          const response = await fetch(url);
+          const itemData = await response.json();
+          setCount(itemData);
+          data = count;
+          console.log(data);
+        }
+        catch(error){console.log(error)}
+      }
+  
+      useEffect(() => {
+        applyFilters();
+      }, []);
+
   const handleApplyFilters = () => {
+    let startDateStr = new Date(startDate).toLocaleDateString('en-US');
+    let endDateStr = new Date(endDate).toLocaleDateString('en-US');
+    let startTimeStr = new Time(startTime).toLocaleTimeString('it-IT');
+    let endTimeStr = new Time(endTime).toLocaleTimeString('it-IT');
+
     const filters = {
-      startDate,
-      endDate,
-      startTime,
-      endTime,
+      startDateStr,
+      endDateStr,
+      startTimeStr,
+      endTimeStr,
       location
     };
+    //APPLY FILTERS HERE
+
+
     // Call the callback function with the current filter values
     console.log(filters)
-    // onApplyFilters(filters);
+    applyFilters(filters);
   };
 
   return (
